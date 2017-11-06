@@ -3,6 +3,7 @@ module AutomationFramework
     include Capybara::DSL
     include Capybara::RSpecMatchers
     include ::RSpec::Matchers
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
     def env
       ENV.fetch('APP_ENV', 'qa')
