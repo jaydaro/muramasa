@@ -8,15 +8,13 @@ feature test_name.to_s, sauce: app.sauce do
 
     app.launch_app(app.url('OCT'))
     app.oct_landing_page.click_link(id:'mobile-nav-link')
-    menu_links = app.oct_landing_page.find_by_id('mobile-nav-container')
+    $menu_links = app.oct_landing_page.find_by_id('mobile-nav-container')
                 .all('a')
                 .map { |anchor| anchor[:href] }
 
-    $menu_links = []
-    menu_links.each_with_index do |link, index|
+    $menu_links.each_with_index do |link, index|
       visit(link)
       app.web_status_code(link)
-      $menu_links << link
       puts "index #{index}: #{link} did resolve with valid status code"
     end
     app.close_all_windows
